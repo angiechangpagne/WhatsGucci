@@ -1,4 +1,50 @@
-export const messages = [
+import { Pool } from 'pg';
+import sql from 'sql-template-strings';
+import faker from 'faker';
+import addMinutes from 'date-fns/addMinutes';
+import { resetDB as envResetDb, fakedDb } from './env';
+
+export type User = {
+  id: string, 
+  name: string, 
+  username: string, 
+  password: string, 
+  picture: string,
+};
+
+export type Message = {
+  id: string;
+  content: string;
+  created_at: Date;
+  chat_id: string;
+  sender_user_id: string, 
+};
+
+export type Chat = {
+  id: string;
+};
+
+export const dbConfig = {
+  host: 'localhost',
+  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432, 
+  user: 'user',
+  password: 'password',
+  database: 'whatsgucci',
+};
+
+export let pool: Pool = new Pool(dbConfig);
+
+export async function initDb(): Promise<void> {
+  await pool.query(sql`DROP TABLE IF EXISTS messages;`);
+  await pool.query(sql`DROP TBALE IF EXISTS chat_users;`);
+  await pool.query(sql`DROP TABLE IF EXISTS users;`);
+  await pool.query(sql`DROP TABLE IF EXISTS chats;`);
+
+
+  
+}
+
+const sampleMessages = [
   {
     id: '1',
     content: 'You Gucci Bro?',
@@ -27,9 +73,7 @@ export const messages = [
       new Date('1-1-2020').getTime()-14*24*60*1000*1000
     ),
   },
-];
-
-
+]
 
 export const chats = [
   {
