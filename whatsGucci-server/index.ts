@@ -1,7 +1,7 @@
 import express from 'express'
 import { ApolloServer, gql } from 'apollo-server-express';
 import cors from 'cors';
-import schema from './whatsGucci-server/schema';
+import schema from './schema';
 
 const app = express();
 app.use(cors());
