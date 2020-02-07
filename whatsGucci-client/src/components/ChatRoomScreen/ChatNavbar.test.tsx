@@ -138,7 +138,7 @@ describe('ChatNavbar', () => {
 
       fireEvent.click(getByTestId('delete-button'));
 
-      await wait(() => expect(history.location.pathname).toEqual('/chats'));
+     await wait(() => expect(history.location.pathname).toEqual('/chats'));
     }
   });
 });
